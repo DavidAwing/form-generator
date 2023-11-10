@@ -163,7 +163,7 @@ function buildRules(scheme, ruleList) {
       config.regList.forEach(item => {
         if (item.pattern) {
           rules.push(
-            `{ pattern: ${eval(item.pattern)}, message: '${item.message}', trigger: '${ruleTrigger[config.tag]}' }`
+            `{ pattern: ${/^\/.+\//.test(item.pattern) ? eval(item.pattern) : new RegExp(`/${item.pattern}/`)}, message: '${item.message}', trigger: '${ruleTrigger[config.tag]}' }`
           )
         }
       })
